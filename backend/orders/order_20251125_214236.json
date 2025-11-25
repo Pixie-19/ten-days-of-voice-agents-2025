@@ -1,0 +1,12 @@
+{
+    "drinkType": "coffee",
+    "size": "large",
+    "milk": "whole",
+    "extras": [
+        "whipped cream",
+        "sugar"
+    ],
+    "name": "Rishi",
+    "timestamp": "2025-11-25T21:42:36.173708",
+    "session_id": "session_20251125_214236"
+}
