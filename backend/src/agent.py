@@ -94,9 +94,9 @@ async def set_drink_type(
 ) -> str:
     """☕ Set the drink type. Call when customer specifies which coffee they want."""
     ctx.userdata.order.drinkType = drink
-    print(f"✅ DRINK SET: {drink.upper()}")
-    print(f"📊 Order Progress: {ctx.userdata.order.get_summary()}")
-    return f"☕ Excellent choice! One {drink} coming up!"
+    print(f" DRINK SET: {drink.upper()}")
+    print(f" Order Progress: {ctx.userdata.order.get_summary()}")
+    return f" Excellent choice! One {drink} coming up!"
 
 @function_tool
 async def set_size(
@@ -106,28 +106,28 @@ async def set_size(
         Field(description="📏 The size of the drink"),
     ],
 ) -> str:
-    """📏 Set the size. Call when customer specifies drink size."""
+    """ Set the size. Call when customer specifies drink size."""
     ctx.userdata.order.size = size
-    print(f"✅ SIZE SET: {size.upper()}")
-    print(f"📊 Order Progress: {ctx.userdata.order.get_summary()}")
-    return f"📏 {size.title()} size - perfect for your {ctx.userdata.order.drinkType}!"
+    print(f" SIZE SET: {size.upper()}")
+    print(f" Order Progress: {ctx.userdata.order.get_summary()}")
+    return f" {size.title()} size - perfect for your {ctx.userdata.order.drinkType}!"
 
 @function_tool
 async def set_milk(
     ctx: RunContext[Userdata],
     milk: Annotated[
         Literal["whole", "skim", "almond", "oat", "soy", "coconut", "none"],
-        Field(description="🥛 The type of milk for the drink"),
+        Field(description=" The type of milk for the drink"),
     ],
 ) -> str:
-    """🥛 Set milk preference. Call when customer specifies milk type."""
+    """ Set milk preference. Call when customer specifies milk type."""
     ctx.userdata.order.milk = milk
-    print(f"✅ MILK SET: {milk.upper()}")
-    print(f"📊 Order Progress: {ctx.userdata.order.get_summary()}")
+    print(f" MILK SET: {milk.upper()}")
+    print(f" Order Progress: {ctx.userdata.order.get_summary()}")
     
     if milk == "none":
-        return "🥛 Got it! Black coffee - strong and simple!"
-    return f"🥛 {milk.title()} milk - great choice!"
+        return " Got it! Black coffee - strong and simple!"
+    return f" {milk.title()} milk - great choice!"
 
 @function_tool
 async def set_extras(
@@ -139,12 +139,12 @@ async def set_extras(
 ) -> str:
     """🎯 Set extras. Call when customer specifies add-ons or says no extras."""
     ctx.userdata.order.extras = extras if extras else []
-    print(f"✅ EXTRAS SET: {ctx.userdata.order.extras}")
-    print(f"📊 Order Progress: {ctx.userdata.order.get_summary()}")
+    print(f" EXTRAS SET: {ctx.userdata.order.extras}")
+    print(f" Order Progress: {ctx.userdata.order.get_summary()}")
     
     if ctx.userdata.order.extras:
-        return f"🎯 Added {', '.join(ctx.userdata.order.extras)} - making it special!"
-    return "🎯 No extras - keeping it classic and delicious!"
+        return f" Added {', '.join(ctx.userdata.order.extras)} - making it special!"
+    return " No extras - keeping it classic and delicious!"
 
 @function_tool
 async def set_name(
@@ -153,9 +153,9 @@ async def set_name(
 ) -> str:
     """👤 Set customer name. Call when customer provides their name."""
     ctx.userdata.order.name = name.strip().title()
-    print(f"✅ NAME SET: {ctx.userdata.order.name}")
-    print(f"📊 Order Progress: {ctx.userdata.order.get_summary()}")
-    return f"👤 Wonderful, {ctx.userdata.order.name}! Almost ready to complete your order!"
+    print(f"NAME SET: {ctx.userdata.order.name}")
+    print(f"Order Progress: {ctx.userdata.order.get_summary()}")
+    return f" Wonderful, {ctx.userdata.order.name}! Almost ready to complete your order!"
 
 @function_tool
 async def complete_order(ctx: RunContext[Userdata]) -> str:
@@ -164,11 +164,11 @@ async def complete_order(ctx: RunContext[Userdata]) -> str:
     
     if not order.is_complete():
         missing = []
-        if not order.drinkType: missing.append("☕ drink type")
-        if not order.size: missing.append("📏 size")
-        if not order.milk: missing.append("🥛 milk")
-        if order.extras is None: missing.append("🎯 extras")
-        if not order.name: missing.append("👤 name")
+        if not order.drinkType: missing.append("drink type")
+        if not order.size: missing.append(" size")
+        if not order.milk: missing.append(" milk")
+        if order.extras is None: missing.append("extras")
+        if not order.name: missing.append(" name")
         
         print(f"❌ CANNOT COMPLETE - Missing: {', '.join(missing)}")
         return f"🔄 Almost there! Just need: {', '.join(missing)}"
@@ -209,14 +209,14 @@ class BaristaAgent(Agent):
             instructions="""
             🏪 You are a FRIENDLY and PROFESSIONAL barista at "Bunny Cafe".
             
-            🎯 MISSION: Take coffee orders by systematically collecting:
-            ☕ Drink Type: latte, cappuccino, americano, espresso, mocha, coffee, cold brew, matcha
-            📏 Size: small, medium, large, extra large
-            🥛 Milk: whole, skim, almond, oat, soy, coconut, none
-            🎯 Extras: sugar, whipped cream, caramel, extra shot, vanilla, cinnamon, honey, or none
-            👤 Customer Name: for the order
+            MISSION: Take coffee orders by systematically collecting:
+            Drink Type: latte, cappuccino, americano, espresso, mocha, coffee, cold brew, matcha
+            Size: small, medium, large, extra large
+            Milk: whole, skim, almond, oat, soy, coconut, none
+            Extras: sugar, whipped cream, caramel, extra shot, vanilla, cinnamon, honey, or none
+            Customer Name: for the order
             
-            📝 PROCESS:
+            PROCESS:
             1. Greet warmly and ask for drink type
             2. Ask for size preference  
             3. Ask for milk choice
@@ -224,7 +224,7 @@ class BaristaAgent(Agent):
             5. Get customer name
             6. Confirm and complete order
             
-            🎨 STYLE:
+            STYLE:
             - Be warm, enthusiastic, and professional
             - Use emojis to make it friendly
             - Ask one question at a time
@@ -277,16 +277,16 @@ def save_order_to_json(order: OrderState) -> str:
         
         print("\n" + "✅" * 30)
         print("🎉 ORDER SAVED SUCCESSFULLY!")
-        print(f"📁 Location: {path}")
-        print(f"👤 Customer: {order.name}")
-        print(f"☕ Order: {order.get_summary()}")
+        print(f" Location: {path}")
+        print(f" Customer: {order.name}")
+        print(f" Order: {order.get_summary()}")
         print("✅" * 30 + "\n")
         
         return path
         
     except Exception as e:
         print(f"\n❌ CRITICAL ERROR SAVING ORDER: {e}")
-        print(f"📁 Attempted path: {path}")
+        print(f"Attempted path: {path}")
         print("🚨 Please check directory permissions!")
         raise e
 
@@ -329,9 +329,9 @@ async def entrypoint(ctx: JobContext):
     ctx.log_context_fields = {"room": ctx.room.name}
 
     print("\n" + "🏪" * 25)
-    print("🚀 BREW & BEAN CAFE - AI BARISTA")
-    print("📁 Orders folder:", get_orders_folder())
-    print("🎤 Ready to take customer orders!")
+    print(" BREW & BEAN CAFE - AI BARISTA")
+    print(" Orders folder:", get_orders_folder())
+    print(" Ready to take customer orders!")
     print("🏪" * 25 + "\n")
 
     # Run test to verify everything works
@@ -341,8 +341,8 @@ async def entrypoint(ctx: JobContext):
     userdata = Userdata(order=create_empty_order())
     
     session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
-    print(f"\n🆕 NEW CUSTOMER SESSION: {session_id}")
-    print(f"📝 Initial order state: {userdata.order.get_summary()}\n")
+    print(f"\n NEW CUSTOMER SESSION: {session_id}")
+    print(f" Initial order state: {userdata.order.get_summary()}\n")
 
     # Create session with userdata
     session = AgentSession(
