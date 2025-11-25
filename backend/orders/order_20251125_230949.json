@@ -1,0 +1,11 @@
+{
+    "drinkType": "latte",
+    "size": "medium",
+    "milk": "oat",
+    "extras": [
+        "vanilla"
+    ],
+    "name": "Rishi",
+    "timestamp": "2025-11-25T23:09:49.203971",
+    "session_id": "session_20251125_230949"
+}

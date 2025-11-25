@@ -7,9 +7,6 @@ from datetime import datetime
 from typing import Annotated, Literal
 from dataclasses import dataclass, field
 
-print("\n" + "🎯" * 50)
-print("💡 agent.py LOADED SUCCESSFULLY!")
-print("🎯" * 50 + "\n")
 
 from dotenv import load_dotenv
 from pydantic import Field
